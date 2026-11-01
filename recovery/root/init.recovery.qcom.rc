@@ -71,12 +71,13 @@ on property:twrp.modules.loaded=true
     start vendor.qseecomd
     start vibratorfeature-hal-service
     start health-hal-2-1
-    umount /firmware
 
 on property:vendor.sys.listeners.registered=true
     start keymaster-4-1
     start gatekeeper-1-0
 
+on property:twrp.all.users.decrypted=true
+    umount /firmware
 service vendor.qseecomd /vendor/bin/qseecomd
     user root
     group root

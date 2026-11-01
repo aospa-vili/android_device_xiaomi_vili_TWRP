@@ -89,6 +89,6 @@ void vendor_load_properties() {
     } else if (sku == "viliin") {
       model_property_override("vili", "vili_in", "Xiaomi 11T Pro");
     } else {
-      model_property_override("unknow", "unknow", "unknow name");
+      model_property_override("vili", "vili_global", "Xiaomi 11T Pro");
     }
 }

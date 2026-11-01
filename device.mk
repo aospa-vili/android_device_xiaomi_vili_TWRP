@@ -54,8 +54,7 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     $(DEVICE_PATH)/security/miui_releasekey
 
-TWRP_REQUIRED_MODULES += miui_prebuilt \
-    magisk_prebuilt
+TWRP_REQUIRED_MODULES += miui_prebuilt
 
 ifneq ($(TW_SKKK_VER_CODE),)
 PRODUCT_PROPERTY_OVERRIDES += ro.twrp.version.skkk.code=$(TW_SKKK_VER_CODE)

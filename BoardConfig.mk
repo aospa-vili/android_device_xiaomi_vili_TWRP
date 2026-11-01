@@ -126,7 +126,7 @@ BOARD_USES_METADATA_PARTITION := true
 ifdef DECRYPT_PLATFORM_VERSION
 PLATFORM_VERSION := $(DECRYPT_PLATFORM_VERSION)
 else
-PLATFORM_VERSION := 13
+PLATFORM_VERSION := 99.87.36
 endif
 PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 PLATFORM_SECURITY_PATCH := 2099-12-31
@@ -162,7 +162,7 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
 TW_MAX_BRIGHTNESS := 2047
 ifeq ($(TW_DEFAULT_LANGUAGE),)
-TW_DEFAULT_LANGUAGE := zh_CN
+TW_DEFAULT_LANGUAGE := en
 endif
 TW_DEFAULT_BRIGHTNESS := 200
 TWRP_INCLUDE_LOGCAT := true
@@ -173,8 +173,9 @@ TW_HAS_EDL_MODE := true
 TW_SUPPORT_INPUT_AIDL_HAPTICS :=true
 TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
 TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
-TW_LOAD_VENDOR_MODULES := "msm_drm.ko fts_touch_spi_k8.ko adsp_loader_dlkm.ko qti_battery_charger_main_odin.ko qti_battery_charger_main_$(PRODUCT_RELEASE_NAME).ko exfat.ko"
+TW_LOAD_VENDOR_MODULES := "msm_drm.ko fts_touch_spi_k8.ko adsp_loader_dlkm.ko qti_battery_charger_main_k8.ko exfat.ko"
 TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone20/temp"
 TW_BATTERY_SYSFS_WAIT_SECONDS := 6
 TW_BACKUP_EXCLUSIONS := /data/fonts,/data/adb/ap,/data/adb/ksu
 TW_FRAMERATE := 60
+TW_ENABLE_FS_COMPRESSION := true

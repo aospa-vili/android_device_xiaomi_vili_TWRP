@@ -20,50 +20,75 @@
 
 FOX_MANIFEST_ROOT=$(gettop)
 if [ -f $FOX_MANIFEST_ROOT/bootable/recovery/orangefox_defaults.go -a -f $FOX_MANIFEST_ROOT/bootable/recovery/orangefox.mk ]; then
-	#export PLATFORM_VERSION="11.0"
-	if [ -z "$TW_DEFAULT_LANGUAGE" ]; then
-		unset TW_DEFAULT_LANGUAGE
-		export TW_DEFAULT_LANGUAGE="zh_CH"
-	fi
-	export OF_KEEP_FORCED_ENCRYPTION=1
-	export OF_PATCH_AVB20=1
-	#export OF_SCREEN_H=2340
-	#export OF_STATUS_H=80
-	#export OF_STATUS_INDENT_LEFT=48
-	#export OF_STATUS_INDENT_RIGHT=48
-	export OF_USE_MAGISKBOOT=1
-	export OF_AB_DEVICE=1
-	export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES=1
+	# Unset obsolete/conflicting vars that may linger in the shell environment
+	unset OF_AB_DEVICE
+	unset OF_SUPPORT_ALL_BLOCK_OTA_UPDATES
+	unset OF_FIX_OTA_UPDATE_MANUAL_FLASH_ERROR
+	unset OF_PATCH_AVB20
+	unset OF_USE_NEW_MAGISKBOOT
+	unset FOX_R11
+	unset FOX_REPLACE_BUSYBOX_PS
+	unset FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER
+	unset FOX_USE_ZIP_BINARY
+
+	export TW_DEFAULT_LANGUAGE="en"
+	export LC_ALL="C"
+	export ALLOW_MISSING_DEPENDENCIES=true
+
+	# A/B & Virtual A/B
+	export FOX_AB_DEVICE=1
+	export FOX_VIRTUAL_AB_DEVICE=1
+	export OF_AB_DEVICE_WITH_RECOVERY_PARTITION=0
+
+	# Screen settings (Xiaomi 11T Pro: 1080x2400 20:9, center punch-hole)
+	export OF_SCREEN_H=2400
+	export OF_STATUS_H=100
+	export OF_STATUS_INDENT_LEFT=48
+	export OF_STATUS_INDENT_RIGHT=48
+	export OF_HIDE_NOTCH=1
+	export OF_CLOCK_POS=1
+	export OF_ALLOW_DISABLE_NAVBAR=0
+
+	# Encryption & Partition settings (A12-A17 FBEv2 + Metadata Encryption)
 	export OF_DONT_PATCH_ENCRYPTED_DEVICE=1
-	export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
+	export OF_KEEP_FORCED_ENCRYPTION=1
+	export OF_FBE_METADATA_MOUNT_IGNORE=1
+	export OF_WIPE_METADATA_AFTER_DATAFORMAT=1
+	export OF_FORCE_CASEFOLDING=1
+	export OF_ENABLE_FS_COMPRESSION=1
+	export OF_UNBIND_SDCARD_F2FS=1
+	export OF_ENABLE_LPTOOLS=1
+	export OF_ENABLE_ALL_PARTITION_TOOLS=1
+	export OF_DYNAMIC_FULL_SIZE=9126805504
 	export OF_NO_TREBLE_COMPATIBILITY_CHECK=1
-	#export OF_FORCE_MAGISKBOOT_BOOT_PATCH_MIUI=1; # if you disable this, then enable the next line
-	export OF_NO_MIUI_PATCH_WARNING=1
-	export OF_USE_GREEN_LED=0
 
-	# use magisk 21.4 for the magisk addon
-	#export FOX_USE_SPECIFIC_MAGISK_ZIP=~/Magisk/Magisk-21.4.zip
-
+	# Binaries & Tools
+	export FOX_ENABLE_APP_MANAGER=1
 	export FOX_USE_BASH_SHELL=1
 	export FOX_ASH_IS_BASH=1
 	export FOX_USE_NANO_EDITOR=1
 	export FOX_USE_TAR_BINARY=1
-	export FOX_USE_ZIP_BINARY=1
 	export FOX_USE_SED_BINARY=1
 	export FOX_USE_XZ_UTILS=1
-	export FOX_REPLACE_BUSYBOX_PS=1
-	export OF_USE_NEW_MAGISKBOOT=1
-	#export FOX_BUGGED_AOSP_ARB_WORKAROUND="1510672800"; # Tue Nov 14 15:20:00 GMT 2017
+	export FOX_USE_LZ4_BINARY=1
+	export FOX_USE_ZSTD_BINARY=1
+	export FOX_USE_DATE_BINARY=1
+	export FOX_USE_GREP_BINARY=1
+	export FOX_USE_BUSYBOX_BINARY=1
+	export FOX_USE_FSCK_EROFS_BINARY=1
+	export FOX_USE_PATCHELF_BINARY=1
+	export FOX_REPLACE_TOOLBOX_GETPROP=1
+	export FOX_USE_UPDATED_MAGISKBOOT=1
 
-	# OTA for custom ROMs
-	export OF_SUPPORT_ALL_BLOCK_OTA_UPDATES=1
-	export OF_FIX_OTA_UPDATE_MANUAL_FLASH_ERROR=1
+	# KernelSU / Next / SukiSU support
+	export FOX_ENABLE_KERNELSU_SUPPORT=1
+	export FOX_ENABLE_KERNELSU_NEXT_SUPPORT=1
+	export FOX_ENABLE_SUKISU_SUPPORT=1
 
-	# -- add settings for R11 --
-	export FOX_R11=1
-	export OF_DISABLE_MIUI_OTA_BY_DEFAULT=1
+	# Misc OrangeFox settings
+	export OF_USE_GREEN_LED=0
+	export FOX_DELETE_AROMAFM=1
 	export OF_QUICK_BACKUP_LIST="/boot;/data;"
-	# -- end R11 settings --
 
 	# let's see what are our build VARs
 	if [ -n "$FOX_BUILD_LOG_FILE" -a -f "$FOX_BUILD_LOG_FILE" ]; then
@@ -73,5 +98,4 @@ if [ -f $FOX_MANIFEST_ROOT/bootable/recovery/orangefox_defaults.go -a -f $FOX_MA
 	   export | grep "TW_" >> $FOX_BUILD_LOG_FILE
 	fi
 fi
-#
 
