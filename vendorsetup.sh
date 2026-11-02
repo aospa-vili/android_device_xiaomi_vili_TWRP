@@ -42,12 +42,13 @@ if [ -f $FOX_MANIFEST_ROOT/bootable/recovery/orangefox_defaults.go -a -f $FOX_MA
 
 	# Screen settings (Xiaomi 11T Pro: 1080x2400 20:9, center punch-hole)
 	export OF_SCREEN_H=2400
-	export OF_STATUS_H=100
-	export OF_STATUS_INDENT_LEFT=48
-	export OF_STATUS_INDENT_RIGHT=48
-	export OF_HIDE_NOTCH=1
+	export OF_STATUS_H=110
+	export OF_STATUS_INDENT_LEFT=54
+	export OF_STATUS_INDENT_RIGHT=54
+	export OF_HIDE_NOTCH=0
 	export OF_CLOCK_POS=1
 	export OF_ALLOW_DISABLE_NAVBAR=0
+	export FOX_RECOVERY_BOOT_PARTITION="/dev/block/bootdevice/by-name/boot"
 
 	# Encryption & Partition settings (A12-A17 FBEv2 + Metadata Encryption)
 	export OF_DONT_PATCH_ENCRYPTED_DEVICE=1
